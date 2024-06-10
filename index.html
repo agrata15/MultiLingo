@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Add Poppins font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+        /* Define background color */
+        body {
+            background-color: #f4f4f4ec; /* Example color */
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif; /* Apply Poppins font to body */
+        }
+        
+        /* Define the initial state of the elements */
+        .hidden {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Define the visible state of the elements */
+        .visible {
+            opacity: 1;
+        }
+
+        .logo-heading img {
+            width: 100px;
+            height: auto;
+        }
+
+        .container {
+            background: linear-gradient(to right, #49ba8c, #634caf);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(251, 249, 249, 0.975);
+        }
+    </style>
+    <title>{% block title %}MultiLingos(Translate){% endblock %}</title>
+</head>
+<body>
+    <!-- Your HTML content -->
+    <div class="container hidden" id="container">
+        <!-- Your existing content here -->
+    </div>
+
+    <script>
+        // Function to check if an element is in the viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Function to handle scroll event
+        function handleScroll() {
+            const container = document.getElementById('container');
+            if (isInViewport(container)) {
+                container.classList.add('visible');
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Initial check in case the element is already in viewport
+        handleScroll();
+        
+    </script>
+
+    <div class="container mt-5">
+        <div class="text-center">
+            <div class="logo-heading">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Word Transliteration">
+                <h1><span>MultiLingos</span></h1>
+                <div class="sm">
+                    <!-- Using Material Icons font -->
+                    <a href="https://wa.me/9327505655" class="nav__link">
+                        <i class="material-icons">message</i>
+                    </a>
+                    <a href="https://www.facebook.com/WDFD.Developer/?" class="nav__link">
+                        <i class="material-icons">facebook</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4 p-4 bg-light rounded">
+            <form method="POST" action="/">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="sentence" placeholder="Enter or Paste sentences" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="inputvalue" required>
+                        <option disabled selected>Select a Language</option>
+                        <option value="hi">Hindi</option>
+                        <option value="en">English</option>
+                        <option value="te">Telugu</option>
+                        <option value="ta">Tamil</option>
+                        <option value="tr">Turkish</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="ur">Urdu</option>
+                        <option value="or">Odia</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mr">Marathi</option>
+                        <option value="ne">Nepali</option>
+                        <option value="fr">French</option>
+                        <option value="zh-cn">Chinese (Simplified)</option>
+                        <option value="zh-tw">Chinese (Traditional)</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="la">Latin</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ro">Romanian</option>
+                        <option value="ru">Russian</option>
+                        <option value="es">Spanish</option>
+                        <option value="gu">Gujarati</option>
+                    </select>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">TRANSLATE</button>
+                </div>
+               <!--- <button type="submit" class="btn btn-primary">TRANSLATE</button>-->
+            </form>
+        </div>
+
+        {% if output %}
+        <div class="mt-4 p-4 bg-light rounded text-center">
+            <h2>{{ sentence }}</h2>
+            <h2 class="text-primary mt-4">Translated Sentences</h2>
+            <h2>{{ output }}</h2>
+        </div>
+        {% else %}
+        <div class="mt-4 p-4 bg-light rounded text-center">
+            <h2>Please Enter or Paste Text or Sentences. The Translated Sentences will be shown here.</h2>
+        </div>
+        {% endif %}
+
+        <div class="text-center mt-5">
+            <h1 class="text-dark">!!!...More Languages will be added Soon...!!!</h1>
+        </div>
+
+        {% if output %}
+        <div class="mt-4 p-4 bg-light rounded">
+            <h2>Translation Result</h2><br>
+            <p><strong>Original Sentence:</strong> {{ sentence }}</p><br>
+            <p><strong>Translated Sentence:</strong> {{ output }}</p><br>
+            <p><strong>Source Language:</strong> {{ source_lang }}</p><br>
+            <p><strong>Destination Language:</strong> {{ destination_lang }}</p><br>
+            <p><strong>Pronunciation:</strong> {{ pronunciation }}</p><br>
+        </div>
+        {% endif %}
+
+       <!--- <div class="text-center mt-5">
+            <h1 class="text-primary">OUR SPONSORSHIP</h1>
+        </div>
+        
+        <div class="container my-5">
+            <div id="sponsorship-swiper" class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ url_for('static', filename='img/logo-poster.jpg') }}" alt="Sponsor 1" class="img-fluid rounded">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ url_for('static', filename='img/sp-1.jpg') }}" alt="Sponsor 2" class="img-fluid rounded">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ url_for('static', filename='img/sp-2.png') }}" alt="Sponsor 3" class="img-fluid rounded">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ url_for('static', filename='img/sp-3.png') }}" alt="Sponsor 4" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper('#sponsorship-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 2,
+                loop: true,
+                autoplay: {
+                    delay: 1000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    700: {
+                        slidesPerView: 3,
+                    },
+                    800: {
+                        slidesPerView: 4,
+                    },
+                },
+            });
+        </script>-->
+        <!-- Inside the <body> tag -->
+
+<!-- Inside the <body> tag -->
+
+    <div class="container mt-5">
+        <h2 class="text-center"></h2>
+        <div class="row">
+            <div class="col-md-8">
+                <img src="{{ url_for('static', filename='img/feature.png') }}" alt="Sponsor 1" class="img-fluid rounded">
+
+            </div>
+           <!-- Inside the <div class="col-md-4"> -->
+
+<!-- Inside the <div class="col-md-4"> -->
+
+    <div class="col-md-4 d-flex align-items-center justify-content-center text-light">
+        <p style="font-size: 24px;">An image is worth a thousand words. That’s why we will display pictures for many words.Upcoming!!</p>
+    </div>
+    
+
+        </div>
+    </div>
+    
+
+
+        <div class="text-center mt-5">
+            <h1 class="text-light bg-dark p-3 rounded">CONTACT US</h1>
+        </div>
+        <div class="container bg-light rounded p-4">
+            <form id ="myForm"action="http://127.0.0.1:5000/" method="POST">
+                <h3><b>Contact us</b></h3><br>
+                <p>Do you have any questions? Please do not hesitate to contact us directly.</p>
+                <p>Our team will come back to you within a matter of hours to help you.</p>
+                <div class="text-center mt-4">
+                    <form id="myForm">
+                        <!-- Your form fields -->
+                        <div class="form-group mt-4">
+                            <input type="text" name="name" id="name" placeholder="Your Name" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input type="text" name="email" id="email" placeholder="Your Email" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <textarea name="message" id="message" rows="5" class="form-control" placeholder="Message" required></textarea>
+                        </div>
+        
+                        <!-- Submit button -->
+                        <button type="button" id="submitButton" class="btn btn-primary">SEND</button>
+                    </form>
+                </div>
+                
+                <script>
+                    document.getElementById("submitButton").addEventListener("click", function() {
+                        // Collect form data
+                        const formData = new FormData(document.getElementById("myForm"));
+                
+                        // Send AJAX request using fetch API
+                        fetch("http://127.0.0.1:5000/", {
+                            method: "POST",
+                            body: formData
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // If the request was successful, display success message
+                                alert("Data saved successfully!");
+                            } else {
+                                // If the request failed, display error message
+                                alert("Failed to save data. Please try again later.");
+                            }
+                        })
+                        .catch(error => {
+                            // If there's a network error, display error message
+                            alert("Network error. Please try again later.");
+                        });
+                    });
+                </script>
+                
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

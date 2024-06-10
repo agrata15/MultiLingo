@@ -1,0 +1,157 @@
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  
+  
+
+  .wf-force-outline-none[tabindex="-1"]:focus{outline:none;}
+  .container{
+    height: content;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+  }
+  .logo-heading {
+    height: 200px;
+    width: 200px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: aliceblue;
+  }
+  .logo-heading img {
+    height: 100%;
+    width: 100%;
+    
+  }
+  .container-data {
+    height: 200px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color:rgba(11, 4, 4, 0.725);
+  }
+  .text {
+    height: 30px;
+    width:100%;
+    border-radius: 5px;
+    border: 2px solid rgb(0, 60, 128);
+    background-color: rgb(252, 248, 248);
+    margin-top: 15px;
+  }
+  .teamForm {
+    height: 30px;
+    width:100%;
+    border-radius: 5px;
+    border: 2px solid rgb(23, 31, 190);
+    background-color: rgb(252, 248, 248);
+    margin-top: 15px;
+  }
+  .btn {
+    height: 30px;
+    width:100px;
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: green;
+    color: white;
+    margin-top: 15px;
+    
+  }
+  .btn:hover {
+    color:black;
+    background-color:yellow;
+    cursor: pointer;
+  }
+  .sentence {
+    height: content;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    padding: 30px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .sentence h2 {
+    font-size:20px;
+    font-weight:bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(0, 19, 128) ;
+  }
+  .output {
+    height: content;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-top: 30px;
+    padding: 30px;
+    font-size:14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 1px solid grey;
+    background-color: rgb(245, 236, 236);
+  }
+  
+  .container-posters {
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(228, 231, 233);
+  }
+  /* items container */
+  .sp-poster {
+    height: 160px;
+    width: 160px;
+    border: none;
+    box-shadow: 0 .5rem 3rem rgba(0,0,0,.5);
+    border-radius: 20px;
+    margin: 10px;
+    justify-content: center;
+    overflow: hidden;
+  
+  }
+  .sp-poster img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .head{
+    height: 40px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid black;
+    background-color: rgb(0, 115, 255);
+    display: flex;
+    flex-flow: column;
+  }
+  .head h2 {
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:rgb(243, 237, 237);
+  }
+  .sm {
+    align-items: right;
+    justify-content: right;
+  }
+  .head-nav {
+    height:30px;
+    width:100%;
+    background-color: rgb(255, 255, 255);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
+  
